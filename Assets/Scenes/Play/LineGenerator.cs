@@ -6,11 +6,12 @@ public class LineGenerator : MonoBehaviour
 {
     [SerializeField] private float lineWidth;
     [SerializeField] private Color lineColor;
-
-    /// <summary>
-    /// 線を保存するリスト
-    /// </summary>
+    
+    // 線を管理するリスト
     public List<LineRenderer> lineRendererList;
+
+    // ポイントを管理するポイント
+    public List<int> pointList;
 
     public enum STATE
     {
@@ -41,6 +42,7 @@ public class LineGenerator : MonoBehaviour
     /// <summary>
     /// 線オブジェクト追加
     /// </summary>
+    /// <param name="pointNum"> </param>>
     public void AddLineObject(Vector3 position)
     {
         Debug.LogError(position);
