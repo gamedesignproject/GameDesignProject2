@@ -10,8 +10,15 @@ public class LineGenerator : MonoBehaviour
     // 線を管理するリスト
     public List<LineRenderer> lineRendererList;
 
-    // ポイントを管理するポイント
+    // ポイントを管理するリスト
     public List<int> pointList;
+
+    // 前回のポイント
+    public int PastPoint { get; set; }
+
+    // 線の始点と終点を管理するリスト
+    // (番号小, 番号大)で登録
+    public List<Vector2> linePointList;
 
     public enum STATE
     {
@@ -24,6 +31,7 @@ public class LineGenerator : MonoBehaviour
     void Start()
     {
         lineRendererList = new List<LineRenderer>();
+        linePointList = new List<Vector2>();
 
         state = STATE.NONE;
     }
@@ -40,14 +48,37 @@ public class LineGenerator : MonoBehaviour
     }
 
     /// <summary>
+    /// ポイントリストにポイントを追加
+    /// </summary>
+    private void AddPointList(int pointNum)
+    {
+
+        if (pointList != null && !pointList.Contains(pointNum))
+        {
+            pointList.Add(pointNum);
+        }
+    }
+
+    /// <summary>
     /// 線オブジェクト追加
     /// </summary>
-    /// <param name="pointNum"> </param>>
-    public void AddLineObject(Vector3 position)
+    /// <param name="isStart"> 描画の始まりか.</param>
+    public void AddLineObject(Vector3 position, int pointNum, bool isStart = false)
     {
-        Debug.LogError(position);
-
         state = STATE.DRAW;
+
+        // 描画の始まりでないなら線のポイントを追加する
+        if (!isStart)
+        {
+            AddLinePointList(pointNum);
+            
+            // 線が既にある場合は線の終点を更新
+            updateLineEndPoint(position);
+        }
+
+        // ポイントの番号を登録
+        PastPoint = pointNum;
+        AddPointList(pointNum);
 
         // オブジェクトをインスタンス化
         GameObject lineObject = new GameObject();
@@ -88,5 +119,38 @@ public class LineGenerator : MonoBehaviour
 
         // 現在描画中の線の終点の座標を更新
         lineRendererList.Last().SetPosition(1, mousePosition);
+    }
+
+    /// <summary>
+    /// 線の終点をポイントの座標で更新
+    ///</summary>
+    private void updateLineEndPoint(Vector3 position)
+    {
+        if (lineRendererList != null && lineRendererList.Count > 0)
+        {
+            lineRendererList.Last().SetPosition(1, position);
+        }
+    }
+
+    /// <summary>
+    /// 既に線があるかを確認
+    /// </summary>
+    public bool CheckHaveLine(int pointNum)
+    {
+        // 同じ点なら持っていることにする
+        if (pointNum == PastPoint) return true;
+        // リストが空っぽならfalseを返す
+        if (linePointList == null || linePointList.Count == 0) return false;
+
+        var linePoint = pointNum < PastPoint ? new Vector2(PastPoint, pointNum) : new Vector2(pointNum, PastPoint);
+        return linePointList.Any(_=>_ == linePoint);   
+    }
+
+    /// <summary>
+    /// 線の点を管理するリストに点を登録
+    /// </summary>
+    public void AddLinePointList(int pointNum)
+    {
+        linePointList.Add(pointNum < PastPoint ? new Vector2(PastPoint, pointNum) : new Vector2(pointNum, PastPoint));
     }
 }
