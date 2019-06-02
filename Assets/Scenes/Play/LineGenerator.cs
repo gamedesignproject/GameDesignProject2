@@ -34,6 +34,8 @@ public class LineGenerator : MonoBehaviour
         linePointList = new List<Vector2>();
 
         state = STATE.NONE;
+
+        PastPoint = -1;
     }
     
     void Update()
@@ -43,6 +45,13 @@ public class LineGenerator : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 updateLineRendererEndPosition();
+            }
+            else
+            {
+                state = STATE.NONE;
+                Destroy(lineRendererList.Last().gameObject);
+                lineRendererList.Remove(lineRendererList.Last());
+                DeletePointNum(PastPoint);
             }
         }
     }
@@ -152,5 +161,20 @@ public class LineGenerator : MonoBehaviour
     public void AddLinePointList(int pointNum)
     {
         linePointList.Add(pointNum < PastPoint ? new Vector2(PastPoint, pointNum) : new Vector2(pointNum, PastPoint));
+    }
+
+    /// <summary>
+    /// 線の始点・終点にポイントが使用されていない場合削除
+    /// </summary>
+    // TODO: メソッド名微妙、変更するかも
+    public void DeletePointNum(int pointNum)
+    {
+        // 線の始点・終点にポイントが使用されていないならば削除
+        if(!linePointList.Exists(_=>_.x == pointNum || _.y == pointNum))
+        {
+            pointList.Remove(pointNum);
+
+            PastPoint = -1;
+        }
     }
 }
