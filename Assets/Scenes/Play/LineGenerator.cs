@@ -18,7 +18,7 @@ public class LineGenerator : MonoBehaviour
 
     // 線の始点と終点を管理するリスト
     // (番号小, 番号大)で登録
-    private List<Vector2> linePointList;
+    public List<Vector2> linePointList;
 
     public enum STATE
     {
@@ -31,6 +31,7 @@ public class LineGenerator : MonoBehaviour
     void Start()
     {
         lineRendererList = new List<LineRenderer>();
+        linePointList = new List<Vector2>();
 
         state = STATE.NONE;
     }
@@ -66,18 +67,18 @@ public class LineGenerator : MonoBehaviour
     {
         state = STATE.DRAW;
 
-        // 線が既にある場合は線の終点を更新
-        updateLineEndPoint(position);
-
-        // ポイントの番号を登録
-        PastPoint = pointNum;
-        AddPointList(pointNum);
-
         // 描画の始まりでないなら線のポイントを追加する
         if (!isStart)
         {
             AddLinePointList(pointNum);
+            
+            // 線が既にある場合は線の終点を更新
+            updateLineEndPoint(position);
         }
+
+        // ポイントの番号を登録
+        PastPoint = pointNum;
+        AddPointList(pointNum);
 
         // オブジェクトをインスタンス化
         GameObject lineObject = new GameObject();
@@ -136,15 +137,12 @@ public class LineGenerator : MonoBehaviour
     /// </summary>
     public bool CheckHaveLine(int pointNum)
     {
-        Debug.Log("1");
         // 同じ点なら持っていることにする
         if (pointNum == PastPoint) return true;
-        Debug.Log("2");
         // リストが空っぽならfalseを返す
         if (linePointList == null || linePointList.Count == 0) return false;
 
         var linePoint = pointNum < PastPoint ? new Vector2(PastPoint, pointNum) : new Vector2(pointNum, PastPoint);
-        Debug.Log("3");
         return linePointList.Any(_=>_ == linePoint);   
     }
 
