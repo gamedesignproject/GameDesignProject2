@@ -173,8 +173,15 @@ public class LineGenerator : MonoBehaviour
         if(!linePointList.Exists(_=>_.x == pointNum || _.y == pointNum))
         {
             pointList.Remove(pointNum);
-
-            PastPoint = -1;
         }
+    }
+
+    /// <summary>
+    /// 最後に描画した線の終点かを返す
+    /// 線がない場合もtrue
+    /// </summary>
+    public bool IsLineLastPoint(int pointNum)
+    {
+        return PastPoint == pointNum || PastPoint == -1;
     }
 }
