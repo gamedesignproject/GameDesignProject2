@@ -11,7 +11,7 @@ public class Point : MonoBehaviour
     public void MouseDown()
     {
         Debug.Log("mouse down");
-        if(lineGenerator.state == LineGenerator.STATE.NONE)
+        if(lineGenerator.state == LineGenerator.STATE.NONE && lineGenerator.IsLineLastPoint(pointNum))
         {
             lineGenerator.AddLineObject(this.transform.position, pointNum, true);
         }
