@@ -24,6 +24,7 @@ public class LineGenerator : MonoBehaviour
     {
         NONE,       // 状態なし
         DRAW,       // 描画中
+        ANSWER,      // 答え合わせ
     }
 
     public STATE state;
@@ -52,6 +53,19 @@ public class LineGenerator : MonoBehaviour
                 Destroy(lineRendererList.Last().gameObject);
                 lineRendererList.Remove(lineRendererList.Last());
                 DeletePointNum(PastPoint);
+                // 線が一つもなければ最後の点を-1
+                if(lineRendererList.Count == 0)
+                {
+                    PastPoint = -1;
+                }
+                else
+                {
+                    // 線がある時にボタンを離せば答え合わせするかをチェック
+                    if (CheckFigure())
+                    {
+                        state = STATE.ANSWER;
+                    }
+                }
             }
         }
     }
@@ -183,5 +197,17 @@ public class LineGenerator : MonoBehaviour
     public bool IsLineLastPoint(int pointNum)
     {
         return PastPoint == pointNum || PastPoint == -1;
+    }
+
+    /// <summary>
+    /// 各頂点から線が2本ずつ出ているなら図形ができていると判断
+    /// ( 各ポイントが2回ずつ使われている )
+    /// </summary>
+    public bool CheckFigure()
+    {
+        // 線が3本より少ないなら図形ではない
+        if (linePointList.Count < 3) return false;
+
+        return pointList.All(point => linePointList.Count(linePoint => linePoint.x == point || linePoint.y == point) == 2);
     }
 }

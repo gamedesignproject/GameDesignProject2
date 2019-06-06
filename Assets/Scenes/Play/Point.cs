@@ -5,6 +5,8 @@ public class Point : MonoBehaviour
     // ポインタの番号
     [SerializeField] private int pointNum;
 
+    public int PointNum { get { return pointNum; } }
+
     [SerializeField] private LineGenerator lineGenerator;
     
     // マウスが押された時の処理
