@@ -11,7 +11,7 @@ public class LineGenerator : MonoBehaviour
     public List<LineRenderer> lineRendererList;
 
     // ポイントを管理するリスト
-    public List<int> pointList;
+   // public List<int> pointList;
 
     // 前回のポイント
     public int PastPoint { get; set; }
@@ -52,7 +52,7 @@ public class LineGenerator : MonoBehaviour
                 state = STATE.NONE;
                 Destroy(lineRendererList.Last().gameObject);
                 lineRendererList.Remove(lineRendererList.Last());
-                DeletePointNum(PastPoint);
+              //  DeletePointNum(PastPoint);
                 // 線が一つもなければ最後の点を-1
                 if(lineRendererList.Count == 0)
                 {
@@ -73,14 +73,14 @@ public class LineGenerator : MonoBehaviour
     /// <summary>
     /// ポイントリストにポイントを追加
     /// </summary>
-    private void AddPointList(int pointNum)
-    {
+    //private void AddPointList(int pointNum)
+    //{
 
-        if (pointList != null && !pointList.Contains(pointNum))
-        {
-            pointList.Add(pointNum);
-        }
-    }
+    //    if (pointList != null && !pointList.Contains(pointNum))
+    //    {
+    //        pointList.Add(pointNum);
+    //    }
+    //}
 
     /// <summary>
     /// 線オブジェクト追加
@@ -101,7 +101,7 @@ public class LineGenerator : MonoBehaviour
 
         // ポイントの番号を登録
         PastPoint = pointNum;
-        AddPointList(pointNum);
+        //AddPointList(pointNum);
 
         // オブジェクトをインスタンス化
         GameObject lineObject = new GameObject();
@@ -174,21 +174,22 @@ public class LineGenerator : MonoBehaviour
     /// </summary>
     public void AddLinePointList(int pointNum)
     {
-        linePointList.Add(pointNum < PastPoint ? new Vector2(PastPoint, pointNum) : new Vector2(pointNum, PastPoint));
+        linePointList.Add(pointNum > PastPoint ? new Vector2(PastPoint, pointNum) : new Vector2(pointNum, PastPoint));
+       // Debug.Log("Vec2 = " + linePointList[linePointList.Count  - 1]);
     }
 
     /// <summary>
     /// 線の始点・終点にポイントが使用されていない場合削除
     /// </summary>
     // TODO: メソッド名微妙、変更するかも
-    public void DeletePointNum(int pointNum)
-    {
-        // 線の始点・終点にポイントが使用されていないならば削除
-        if(!linePointList.Exists(_=>_.x == pointNum || _.y == pointNum))
-        {
-            pointList.Remove(pointNum);
-        }
-    }
+    //public void DeletePointNum(int pointNum)
+    //{
+    //    // 線の始点・終点にポイントが使用されていないならば削除
+    //    if(!linePointList.Exists(_=>_.x == pointNum || _.y == pointNum))
+    //    {
+    //        pointList.Remove(pointNum);
+    //    }
+    //}
 
     /// <summary>
     /// 最後に描画した線の終点かを返す
@@ -207,7 +208,7 @@ public class LineGenerator : MonoBehaviour
     {
         // 線が3本より少ないなら図形ではない
         if (linePointList.Count < 3) return false;
-
-        return pointList.All(point => linePointList.Count(linePoint => linePoint.x == point || linePoint.y == point) == 2);
+        else return true;
+        //return pointList.All(point => linePointList.Count(linePoint => linePoint.x == point || linePoint.y == point) == 2);
     }
 }

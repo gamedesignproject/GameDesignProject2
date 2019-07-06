@@ -33,7 +33,7 @@ public class PlayManager : MonoBehaviour
         // 答えの合わせ
         if(lineGenerator.state == LineGenerator.STATE.ANSWER)
         {
-            answer.CheckAnswer(questionNum, lineGenerator.pointList);
+            answer.CheckAnswer(questionNum, lineGenerator.linePointList);
             lineGenerator.state = LineGenerator.STATE.NONE;
         }
     }

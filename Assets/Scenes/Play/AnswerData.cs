@@ -8,7 +8,7 @@ public class AnswerData : MonoBehaviour
     public List<int> activePointList;
 
     // 解答のポイントリスト
-    public List<int> answerPointList;
+    public List<AnswerExample> answerPointList;
 
     // 図形のタイプ
     public TYPE type;
@@ -17,6 +17,12 @@ public class AnswerData : MonoBehaviour
     {
         // 正三角形
         REGULAR_TRIANGLE,
+        // 直角三角形
+        RIGHT_TRIANGLE,
+        // 二等辺三角形
+        ISOSCELES_TRIANGLE,
+        // 長方形
+        RECTANGULAR,
     }
 
 }
