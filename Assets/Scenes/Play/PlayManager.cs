@@ -20,6 +20,9 @@ public class PlayManager : MonoBehaviour
     // 現在の挑戦中の問題
     private AnswerData answerData;
 
+    // 問題の回転角度
+    private const int EasyAngle = 60;
+
     private void Start()
     {
         answer.Initialize();
@@ -33,7 +36,15 @@ public class PlayManager : MonoBehaviour
         // 答えの合わせ
         if(lineGenerator.state == LineGenerator.STATE.ANSWER)
         {
-            answer.CheckAnswer(questionNum, lineGenerator.linePointList);
+            if (answer.CheckAnswer(questionNum, lineGenerator.linePointList))
+            {
+                //正解
+                lineGenerator.LineReset();
+            }
+            else
+            {
+
+            }
             lineGenerator.state = LineGenerator.STATE.NONE;
         }
     }
@@ -69,5 +80,17 @@ public class PlayManager : MonoBehaviour
                 childPoint.gameObject.SetActive(false);
             }
         }
+
+        SetAngle(easyPoint);
+    }
+
+    // 問題の角度
+    void SetAngle(GameObject point)
+    {
+        int Rand = Random.Range(0,point.transform.childCount);
+        int Angle = Rand * EasyAngle;
+        Vector3 rot = new Vector3(0, 0, Angle);
+
+        point.transform.Rotate(rot);
     }
 }

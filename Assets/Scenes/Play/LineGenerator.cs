@@ -211,4 +211,14 @@ public class LineGenerator : MonoBehaviour
         else return true;
         //return pointList.All(point => linePointList.Count(linePoint => linePoint.x == point || linePoint.y == point) == 2);
     }
+
+    public void LineReset()
+    {
+        lineRendererList.ForEach(_ => { Destroy(_.gameObject); lineRendererList.Remove(_); });
+        linePointList.Clear();
+
+        state = STATE.NONE;
+
+        PastPoint = -1;
+    }
 }
