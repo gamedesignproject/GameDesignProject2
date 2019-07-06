@@ -15,7 +15,7 @@ public class Point : MonoBehaviour
         Debug.Log("mouse down");
         if(lineGenerator.state == LineGenerator.STATE.NONE && lineGenerator.IsLineLastPoint(pointNum))
         {
-            lineGenerator.AddLineObject(this.transform.position, pointNum, true);
+            lineGenerator.AddLineObject(this.transform.GetChild(0).position, pointNum, true);
         }
     }
 
@@ -27,7 +27,7 @@ public class Point : MonoBehaviour
         if(lineGenerator.state == LineGenerator.STATE.DRAW && lineGenerator.PastPoint != pointNum && !lineGenerator.CheckHaveLine(pointNum))
         {
             Debug.Log("線追加");
-            lineGenerator.AddLineObject(this.transform.position, pointNum);
+            lineGenerator.AddLineObject(this.transform.GetChild(0).position, pointNum);
         }
     }
 
