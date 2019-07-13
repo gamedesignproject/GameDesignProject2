@@ -13,6 +13,9 @@ public class Answer : MonoBehaviour
     List<AnswerData> answerDatas = new List<AnswerData>
     {
         new AnswerData(){activePointList = new List<int>{ 1, 3, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,3,5) }, type = AnswerData.TYPE.REGULAR_TRIANGLE },
+        new AnswerData(){activePointList = new List<int>{ 1, 2, 3, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4),SetanswerLine(1,2,5),SetanswerLine(1,4,5),SetanswerLine(2,4,5) }, type = AnswerData.TYPE.RIGHT_TRIANGLE },
+        new AnswerData(){activePointList = new List<int>{ 2, 3, 4, 6}, answerPointList = new List<AnswerExample>{ SetanswerLine(2,3,4) }, type = AnswerData.TYPE.ISOSCELES_TRIANGLE },
+        new AnswerData(){activePointList = new List<int>{ 1, 2, 4, 5 ,6}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4,5) }, type = AnswerData.TYPE.RECTANGULAR },
     };
 
     /// <summary>
@@ -47,11 +50,11 @@ public class Answer : MonoBehaviour
         // ポイントが一致しているかを確認
         //return answerList[questionNum].answerPointList.All(answerPoint => pointList.Contains(answerPoint));
         for (int i = 0; i < answerList[questionNum].answerPointList.Count; i++) {
-            Debug.Log(answerList[questionNum].answerPointList.Count);
+            Debug.Log("回答数" + answerList[questionNum].answerPointList.Count);
             if (answerList[questionNum].answerPointList[i].answerLine.All(answerPoint => pointList.Contains(answerPoint))) {
                 Debug.Log("正解");
                 return true;
-            } 
+            }
         }
 
         Debug.Log("不正解");
