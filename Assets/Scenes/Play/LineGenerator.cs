@@ -24,7 +24,7 @@ public class LineGenerator : MonoBehaviour
     {
         NONE,       // 状態なし
         DRAW,       // 描画中
-        ANSWER,      // 答え合わせ
+        ANSWER,     // 答え合わせ
     }
 
     public STATE state;
