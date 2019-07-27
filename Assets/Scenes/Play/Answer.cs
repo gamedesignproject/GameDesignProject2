@@ -13,9 +13,9 @@ public class Answer : MonoBehaviour
     List<AnswerData> answerDatas = new List<AnswerData>
     {
         new AnswerData(){activePointList = new List<int>{ 1, 3, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,3,5) }, type = AnswerData.TYPE.REGULAR_TRIANGLE },
-        new AnswerData(){activePointList = new List<int>{ 1, 2, 3, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4),SetanswerLine(1,2,5),SetanswerLine(1,4,5),SetanswerLine(2,4,5) }, type = AnswerData.TYPE.RIGHT_TRIANGLE },
-        new AnswerData(){activePointList = new List<int>{ 2, 3, 4, 6}, answerPointList = new List<AnswerExample>{ SetanswerLine(2,3,4) }, type = AnswerData.TYPE.ISOSCELES_TRIANGLE },
-        new AnswerData(){activePointList = new List<int>{ 1, 2, 4, 5 ,6}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4,5) }, type = AnswerData.TYPE.RECTANGULAR },
+        new AnswerData(){activePointList = new List<int>{ 1, 2, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4),SetanswerLine(1,2,5),SetanswerLine(1,4,5),SetanswerLine(2,4,5) }, type = AnswerData.TYPE.RIGHT_TRIANGLE },
+        new AnswerData(){activePointList = new List<int>{ 2, 3, 4}, answerPointList = new List<AnswerExample>{ SetanswerLine(2,3,4) }, type = AnswerData.TYPE.ISOSCELES_TRIANGLE },
+        new AnswerData(){activePointList = new List<int>{ 0, 1, 2, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4,5) }, type = AnswerData.TYPE.RECTANGULAR },
     };
 
     /// <summary>
@@ -33,6 +33,20 @@ public class Answer : MonoBehaviour
     public AnswerData GetAnswer(int index)
     {
         return answerList[index];
+    }
+
+    /// <summary>
+    /// 問題データの終わりまで来たときに問題を新しくする
+    /// </summary>
+    /// <returns></returns>
+    public int CheakAnswerList(int index)
+    {
+        if (index == answerList.Count)
+        {
+            answerList = answerDatas.OrderBy(_ => Guid.NewGuid()).ToList();
+            return 0;
+        }
+        return index;
     }
 
     /// <summary>

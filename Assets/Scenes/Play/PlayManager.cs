@@ -16,6 +16,8 @@ public class PlayManager : MonoBehaviour
     [SerializeField] GameObject easyPoint;
     // 残り時間
     [SerializeField] Text Timetext;
+    // 正解アニメーション
+    [SerializeField] GameObject CorrectAnime;
 
     // 現在の問題番号
     private int questionNum;
@@ -29,6 +31,9 @@ public class PlayManager : MonoBehaviour
     private const int Timelimit = 60;
 
     private float GameTime;
+
+    // 正解数
+    private int ScoreCount;
 
     private enum State
     {
@@ -46,29 +51,29 @@ public class PlayManager : MonoBehaviour
         InitializePoint();
         state = State.NONE;
         GameTime = Timelimit;
-        
+        ScoreCount = 0;
 
         Debug.Log(answerData.type);
     }
 
     private void Update()
     {
-        GameTime -= Time.deltaTime;
-
-        Timetext.text = ((int)GameTime).ToString();
+        PlayUI();
 
         // 答えの合わせ
         if (lineGenerator.state == LineGenerator.STATE.ANSWER && state == State.NONE)
         {
+            Debug.Log("チェック");
             if (answer.CheckAnswer(questionNum, lineGenerator.linePointList))
             {
                 //正解
                 lineGenerator.LineReset();
                 state = State.CORRECT;
+                ScoreCount += 1;
             }
             else
             {
-               // lineGenerator.LineReset();
+                lineGenerator.LineReset();
                 lineGenerator.state = LineGenerator.STATE.NONE;
             }
           
@@ -76,7 +81,8 @@ public class PlayManager : MonoBehaviour
 
         if (state == State.CORRECT)
         {
-            NextQestion();
+            // NextQestion();
+            StartCoroutine(ShowCorrectAnimater());
         }
     }
 
@@ -148,12 +154,53 @@ public class PlayManager : MonoBehaviour
     void NextQestion()
     {
         questionNum += 1;
+
+        questionNum = answer.CheakAnswerList(questionNum);
         answerData = answer.GetAnswer(questionNum);
+
+        //if ((answerData = answer.GetAnswer(questionNum)) == default)
+        //{
+        //    questionNum = 0;
+        //    answerData = answer.GetAnswer(questionNum);
+        //}
         InitializePoint();
         SetFigureInfo();
         state = State.NONE;
         lineGenerator.state = LineGenerator.STATE.NONE;
 
         Debug.Log("次");
+    }
+
+    // 正解アニメーションと次の問題への切り替え
+    IEnumerator ShowCorrectAnimater()
+    {
+        CorrectAnime.SetActive(true);
+        Animator animator = CorrectAnime.transform.GetChild(0).GetComponent<Animator>();
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0); 
+
+        while(state.normalizedTime < 1)
+        {
+            yield return null;
+        }
+
+        CorrectAnime.SetActive(false);
+        NextQestion();
+    }
+
+    // UI描画
+    void PlayUI()
+    {
+        GameTime -= Time.deltaTime;
+
+        string time = ((int)GameTime).ToString(); ;
+
+        Timetext.text = $"残り時間 {time} : 正解数 {ScoreCount}";
+
+        // ゲーム終了
+        if (GameTime < 0)
+        {
+            GameData.gamedata.AddScore(ScoreCount);
+            GameData.gamedata.SceneChange(GameData.SceneState.RESULT);
+        }
     }
 }
