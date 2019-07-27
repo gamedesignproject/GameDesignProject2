@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
 
 public class Title : MonoBehaviour
 {
@@ -60,7 +58,7 @@ public class Title : MonoBehaviour
     public void GameStart()
     {
         Debug.Log("Start");
-
+        GameData.gamedata.SceneChange(GameData.SceneState.PLAY);
 
     }
 

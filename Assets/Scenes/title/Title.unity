@@ -463,7 +463,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5743e9a95f2d67e48a7242902b716b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_select: 0
 --- !u!1 &291228277
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5743e9a95f2d67e48a7242902b716b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_select: 0
 --- !u!1 &312988951
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +642,7 @@ GameObject:
   - component: {fileID: 312988955}
   - component: {fileID: 312988954}
   - component: {fileID: 312988953}
+  - component: {fileID: 312988956}
   m_Layer: 5
   m_Name: GameStartButton
   m_TagString: Untagged
@@ -713,7 +712,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 312988954}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 312988956}
+        m_MethodName: GameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &312988954
@@ -753,6 +763,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312988951}
   m_CullTransparentMesh: 0
+--- !u!114 &312988956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312988951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5743e9a95f2d67e48a7242902b716b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &493828963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5743e9a95f2d67e48a7242902b716b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_select: 0
 --- !u!1 &770714794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,7 +1803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5743e9a95f2d67e48a7242902b716b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_select: 0
 --- !u!1 &1326426474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,6 +1882,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326426474}
   m_CullTransparentMesh: 0
+--- !u!1 &1532339817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532339819}
+  - component: {fileID: 1532339818}
+  m_Layer: 0
+  m_Name: GameData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1532339818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532339817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3780f643faed20e43a479bf21de2e1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 
+--- !u!4 &1532339819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532339817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.012073855, y: 3.8051257, z: -5.129849}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1847607034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2154,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GSME START
+  m_Text: GAME START
 --- !u!222 &2020149036
 CanvasRenderer:
   m_ObjectHideFlags: 0
