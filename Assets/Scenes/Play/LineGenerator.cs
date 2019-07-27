@@ -214,8 +214,9 @@ public class LineGenerator : MonoBehaviour
 
     public void LineReset()
     {
-        lineRendererList.ForEach(_ => { Destroy(_.gameObject); lineRendererList.Remove(_); });
+        lineRendererList.ForEach(_ =>  Destroy(_.gameObject) );
         linePointList.Clear();
+        lineRendererList.Clear();
 
         state = STATE.NONE;
 
