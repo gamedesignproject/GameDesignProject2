@@ -28,7 +28,7 @@ public class PlayManager : MonoBehaviour
     private const int EasyAngle = 60;
 
     // ゲーム時間
-    private const int Timelimit = 60;
+    private const int Timelimit = 10;
 
     private float GameTime;
 

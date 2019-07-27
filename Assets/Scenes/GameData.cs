@@ -44,9 +44,9 @@ public class GameData : MonoBehaviour
         Score.Sort((a, b) => b - a);
 
         // スコアが３つ以上の時一番小さいスコアを消す
-        if (Score.Count < 3)
+        if (Score.Count > 3)
         {
-            Score.RemoveRange(3, Score.Count - 1);
+            Score.RemoveRange(3, 1);
         }
     }
 
