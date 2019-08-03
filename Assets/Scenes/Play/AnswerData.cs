@@ -23,6 +23,11 @@ public class AnswerData : MonoBehaviour
         ISOSCELES_TRIANGLE,
         // 長方形
         RECTANGULAR,
+        // 凧形
+        TAKOGATA,
+        // 台形
+        TRAPEZOID,
+
     }
 
 }

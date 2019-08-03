@@ -14,8 +14,10 @@ public class Answer : MonoBehaviour
     {
         new AnswerData(){activePointList = new List<int>{ 1, 3, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,3,5) }, type = AnswerData.TYPE.REGULAR_TRIANGLE },
         new AnswerData(){activePointList = new List<int>{ 1, 2, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4),SetanswerLine(1,2,5),SetanswerLine(1,4,5),SetanswerLine(2,4,5) }, type = AnswerData.TYPE.RIGHT_TRIANGLE },
-        new AnswerData(){activePointList = new List<int>{ 2, 3, 4}, answerPointList = new List<AnswerExample>{ SetanswerLine(2,3,4) }, type = AnswerData.TYPE.ISOSCELES_TRIANGLE },
+        new AnswerData(){activePointList = new List<int>{ 1, 2, 3, 4}, answerPointList = new List<AnswerExample>{ SetanswerLine(2,3,4),SetanswerLine(1,2,3) }, type = AnswerData.TYPE.ISOSCELES_TRIANGLE },
         new AnswerData(){activePointList = new List<int>{ 0, 1, 2, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(1,2,4,5) }, type = AnswerData.TYPE.RECTANGULAR },
+        new AnswerData(){activePointList = new List<int>{ 0, 1, 2, 3, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(0,1,3,5),SetanswerLine(1,2,3,5) }, type = AnswerData.TYPE.TAKOGATA },
+         new AnswerData(){activePointList = new List<int>{ 0, 1, 2, 4, 5}, answerPointList = new List<AnswerExample>{ SetanswerLine(0,1,4,5),SetanswerLine(0,1,2,5) }, type = AnswerData.TYPE.TRAPEZOID },
     };
 
     /// <summary>
