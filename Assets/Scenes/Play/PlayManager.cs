@@ -28,7 +28,7 @@ public class PlayManager : MonoBehaviour
     private const int EasyAngle = 60;
 
     // ゲーム時間
-    private const int Timelimit = 10;
+    private const int Timelimit = 60;
 
     private float GameTime;
 
@@ -117,6 +117,17 @@ public class PlayManager : MonoBehaviour
                 figureName.text = "長方形";
                 break;
 
+            case AnswerData.TYPE.TAKOGATA:
+                // 凧形
+                infoText.text = "隣り合った2本の辺の長さが等しい組が2組ある図形";
+                figureName.text = "凧形";
+                break;
+
+            case AnswerData.TYPE.TRAPEZOID:
+                // 台形
+                infoText.text = "四角形の一部で、少なくとも一組の対辺が互いに平行であるような図形";
+                figureName.text = "台形";
+                break;
         }
     }
 
@@ -151,7 +162,7 @@ public class PlayManager : MonoBehaviour
     }
 
     // 次の問題への切り替え
-    void NextQestion()
+    public void NextQestion()
     {
         questionNum += 1;
 
