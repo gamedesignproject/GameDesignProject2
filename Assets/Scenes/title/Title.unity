@@ -2005,7 +2005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3780f643faed20e43a479bf21de2e1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 010000000500000003000000
+  Score: 000000000000000000000000
 --- !u!4 &1532339819
 Transform:
   m_ObjectHideFlags: 0
@@ -2034,7 +2034,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
